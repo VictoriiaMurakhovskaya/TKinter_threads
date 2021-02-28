@@ -83,10 +83,10 @@ class App:
         self.startButton.config(state=DISABLED)  # потоки запускаются только один раз. Кнопка становится недоступной
         if self.launch_type.get():
             # запуск потоков параллельно
-            for item in zip(self.updaters, self.ran):
+            for item in enumerate(self.updaters):
                 try:
-                    item[0].start()
-                    item[1] = True
+                    item[1].start()
+                    self.ran[item[0]] = True
                 except AssertionError:
                     mb.showerror(title='Error', message='Already running')
                     break
